@@ -1,0 +1,20 @@
+{%extends 'basic.html'%}
+
+{% block content%}
+
+<title>Home Page</title>
+</head>
+<body>
+   
+    <div style="text-align: right;">
+        
+            <a href="{% url 'register'%}">Signup</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <a href="{% url 'enter'%}">Login</a>
+        
+    </div>
+
+    
+</body>
+</html>
+{% endblock%}
