@@ -8,7 +8,7 @@
 <div style="text-align: right;">
   
   {% if user.is_authenticated%}
-  Hello, {{user.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Hello, {{user.first_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="{% url 'logout'%}">Logout</a>
 
   {%else%}
@@ -21,7 +21,7 @@
   
 </div><br><br>
 
-<form action="serchride" style="border:1px solid #ccc" method="post">
+<form action="getride" style="border:1px solid #ccc" method="post">
     {% csrf_token %}
     <div class="container">
     <center>
@@ -46,10 +46,16 @@
       <br>
   
       <div class="clearfix">
-        <button type="button" class="loginbtn">Search</button>
+        <button type="submit" class="getride">Search</button>
       </div>
     </div>
     </form>
+
+    <div style="text-align: center;">
+      {% for message in messages%}
+      <b>{{message}}</b>
+      {%endfor%}
+    </div>
   </center>
 
   {% endblock%}

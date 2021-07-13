@@ -9,7 +9,7 @@
 <div style="text-align: right;">
 
   {% if user.is_authenticated%}
-  Hello, {{user.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Hello, {{user.first_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="{% url 'logout'%}">Logout</a>
 
   {%else%}
@@ -21,6 +21,8 @@
   {%endif%}
   
 </div><br><br>
+
+
 
 <form action="offerride" style="border:1px solid #ccc" method="post">
     {% csrf_token %}
@@ -46,15 +48,23 @@
       <label for="seats"><b>Number of seats available</b></label>
       <input type="integer" placeholder="Enter Number of seats available" name="seats" required>
 
+      <label for="seats"><b>Enter your user name</b></label>
+      <input type="text" placeholder="Usrer name" name="username" required>
+
       <br>
       <br>
       <br>
   
       <div class="clearfix">
-        <button type="button" class="loginbtn">Offer Ride</button>
+        <button type="submit" class="offerride">Offer Ride</button>
       </div>
     </div>
     </form>
+    <div style="text-align: center;">
+      {% for message in messages%}
+      <b>{{message}}</b>
+      {%endfor%}
+    </div>
   </center>
 
   {% endblock%}

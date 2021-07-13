@@ -8,7 +8,7 @@
     <div style="text-align: right;">
 
         {% if user.is_authenticated%}
-        Hello, {{user.name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Hello, {{user.first_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="{% url 'logout'%}">Logout</a>
 
         {%else%}
@@ -22,14 +22,14 @@
     </div><br><br>
 
     <div style="text-align: center;">
-        <form action="offerride" method="post">
+        <form action="offerride" method="get">
             {% csrf_token %}
 
                   <button type="submit" class="signupbtn">Offer Ride</button>
                   
                 
         </form><br><br>
-        <form action="getride" method="post">
+        <form action="getride" method="get">
             {% csrf_token %}
 
                   <button type="submit" class="signupbtn">Get Ride</button>

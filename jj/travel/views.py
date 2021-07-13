@@ -4,7 +4,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render,redirect
 from .models import travel
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,auth
 from django.contrib.auth import authenticate
 # Create your views here.
 
@@ -21,11 +21,11 @@ def register(request):
         pass2 = request.POST['psw2']
 
         if pass1==pass2:
-            if auth.objects.filter(username=username).exists():
+            if User.objects.filter(username=username).exists():
                 messages.info(request,'User name already taken')
                 return redirect('register')
             else:
-                user= User.objects.create_user(name=name, phno=phno, email=email, password=pass1, username=username)
+                user= User.objects.create_user(first_name=name,  email=email, password=pass1, username=username)
                 user.save()
                 return redirect('enter')
         else:
@@ -44,13 +44,13 @@ def offerride(request):
         startp = request.POST['startp']
         endp = request.POST['endp']
         seats=request.POST['seats']
+        username=request.POST['username']
 
         if startp==endp:
             messages.info(request,'Distance is too small')
             return redirect('offerride')
         else:
-            tr= travel.objects.create(startp=startp, endp=endp, seats=seats)
-            tr.username_id=request.user
+            tr= travel.objects.create(username=username,startp=startp, endp=endp, seats=seats)
             tr.save()
             messages.info(request,'Successfuly added. You will be notified if we find any suitable ride')
             return redirect('offerride')
@@ -68,7 +68,7 @@ def enter(request):
          username = request.POST['username']
          password = request.POST['psw']
 
-         user = authenticate(username=username,password=password)
+         user = auth.authenticate(username=username,password=password)
 
          if user is not None:
              auth.login(request,user)
@@ -90,9 +90,17 @@ def getride(request):
         startp = request.POST['startpin']
         endp = request.POST['endpin']
         seats=request.POST['seats']
-        
+
 
         travelinfo = travel.objects.all()
+
+        startpins=travelinfo.startp
+
+        for startpin in startpins:
+            if startpin==startp:
+                messages.info(request,'congratulations')        
+
+
 
         return redirect(request,'getride')
     else:

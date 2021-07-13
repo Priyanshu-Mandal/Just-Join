@@ -12,7 +12,7 @@ class user(models.Model):
     password=models.CharField(max_length=10)
 
 class travel(models.Model):
-    username=models.ForeignKey(user, on_delete=models.CASCADE)
+    username=models.CharField(max_length=100)
     startp=models.IntegerField()
     endp=models.IntegerField()
     seats=models.IntegerField()
