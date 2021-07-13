@@ -1,0 +1,64 @@
+{%extends 'basic.html'%}
+
+{% block content%}
+<title>Get ride</title>
+
+<a style="text-align: left;" href="{% url 'home'%}">Home page</a>
+
+<div style="text-align: right;">
+  
+  <!-- {% if user.is_authenticated%} -->
+  Hello, {{request.user.first_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="{% url 'logout'%}">Logout</a>
+
+  <!-- {%endif%} -->
+  
+</div><br><br>
+
+<form action="getride" style="border:1px solid #ccc" method="post">
+    {% csrf_token %}
+    <div class="container">
+    <center>
+      <h1>Search Ride</h1>
+      <p>Please fill in this fields to search a ride if available
+      </p>
+      <hr>
+  
+      <label for="start"><b>Start point</b></label>
+      <input type="text" placeholder="Enter Adress of the start point" name="start" required>
+
+      <label for="startpin"><b>Start pin code</b></label>
+      <input type="integer" placeholder="Enter Start point pin" name="startpin" required><br><br>
+  
+      <label for="end"><b>End point</b></label>
+      <input type="text" placeholder="Enter Address of the destination" name="end" required>
+
+      <label for="endpin"><b>Destination pin code</b></label>
+      <input type="integer" placeholder="Enter Start point pin" name="endpin" required><br><br>
+
+      <label for="seats"><b>Number of seats requiered</b></label>
+      <input type="integer" placeholder="seats required" name="seats" required>
+      <br>
+      <br>
+      <br>
+  
+      <div class="clearfix">
+        <button type="submit" class="getride">Search</button>
+      </div>
+    </div>
+    </form>
+
+    <div style="text-align: center;">
+
+      {% if messages %}
+      {% for message in messages%}
+      <b>User with username {{message.username}} have ssame ride destination as you</b>
+      {%endfor%}
+      {%else%}
+      <b>No rides to offer</b>
+      {%endif%}
+
+    </div>
+  </center>
+
+  {% endblock%}

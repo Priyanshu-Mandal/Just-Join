@@ -1,0 +1,63 @@
+{%extends 'basic.html'%}
+
+{% block content%}
+<title>offer ride</title>
+<div>
+  <a style="text-align: left;" href="{% url 'home'%}">Home page</a>
+</div>
+
+<div style="text-align: right;">
+
+  {% if user.is_authenticated%}
+  Hello, {{user.first_name}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="{% url 'logout'%}">Logout</a>
+  {%endif%}
+  
+</div><br><br>
+
+
+
+<form action="offerride" style="border:1px solid #ccc" method="post">
+    {% csrf_token %}
+    <div class="container">
+    <center>
+      <h1>Offer Ride</h1>
+      <p>Please fill in this fields to offer a ride to someone
+      </p>
+      <hr>
+  
+      <label for="start"><b>Start point</b></label>
+      <input type="text" placeholder="Enter Adress of the start point" name="start" required>
+
+      <label for="startpin"><b>Start pin code</b></label>
+      <input type="integer" placeholder="Enter Start point pin" name="startp" required><br><br>
+  
+      <label for="end"><b>End point</b></label>
+      <input type="text" placeholder="Enter Address of the destination" name="end" required>
+
+      <label for="endpin"><b>Destination pin code</b></label>
+      <input type="integer" placeholder="Enter End point pin" name="endp" required><br><br>
+
+      <label for="seats"><b>Number of seats available</b></label>
+      <input type="integer" placeholder="Enter Number of seats available" name="seats" required>
+
+      <label for="seats"><b>Enter your user name</b></label>
+      <input type="text" placeholder="Usrer name" name="username" required>
+
+      <br>
+      <br>
+      <br>
+  
+      <div class="clearfix">
+        <button type="submit" class="offerride">Offer Ride</button>
+      </div>
+    </div>
+    </form>
+    <div style="text-align: center;">
+      {% for message in messages%}
+      <b>{{message}}</b>
+      {%endfor%}
+    </div>
+  </center>
+
+  {% endblock%}
