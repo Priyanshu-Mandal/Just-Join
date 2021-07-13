@@ -3,7 +3,11 @@
 {% block content%}
 
 <title>Sign Up</title>
-<form action="register" method="post">
+
+<div>
+<a href="{% url 'home'%}">Home page</a>
+</div>
+<form action="register" style="border:1px solid #ccc" method="post">
   {% csrf_token %}
     <div class="container">
         <center> 
@@ -16,7 +20,7 @@
 
 
       <label for="phoneno"><b>Phone number:</b></label>
-      <input type="number" placeholder="Enter Phone number" id="phone number" name="phone"><br><br>
+      <input type="text" placeholder="Enter Phone number" id="phone number" name="phone"><br><br>
       
       <label for="email"><b>Email</b></label>
       <input type="text" placeholder="Enter Email" name="email" required><br><br>
@@ -36,6 +40,12 @@
       </div>
     </div>
   </form>
+
+  <div style="text-align: center;">
+    {% for message in messages%}
+    <b>{{message}}</b>
+    {%endfor%}
+  </div>
 </center>
   {% endblock%}
 

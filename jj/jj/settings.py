@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'jj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jj',
+        'NAME': 'justjoin',
         'USER': 'postgres',
         'PASSWORD': 'neel',
         'HOST': 'localhost'

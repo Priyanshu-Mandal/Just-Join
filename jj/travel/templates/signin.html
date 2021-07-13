@@ -2,7 +2,14 @@
 
 {% block content%}
 <title>Sign In</title>
-<form action="action_page.php" style="border:1px solid #ccc">
+
+<div>
+  <a href="{% url 'home'%}">Home page</a>
+</div>
+
+
+<form action="enter" style="border:1px solid #ccc" method="post">
+  {% csrf_token %}
     <div class="container">
     <center>
       <h1>Sign In</h1>
@@ -14,16 +21,24 @@
   
       <label for="psw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="psw" required>
-      <br>
-      <br>
-      <br>
+
+      <br><br><br>
   
       <div class="clearfix">
-        <button type="button" class="loginbtn">Login</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
+        <button type="submit" class="loginbtn">Login</button><br><br>
       </div>
     </div>
+
+    <div style="text-align: center;">
+      Do not have an account <a href="{% url 'register'%}">register</a> here
+    </div>
     </form>
+
+    <div style="text-align: center;">
+      {% for message in messages%}
+      <b>{{message}}</b>
+      {%endfor%}
+    </div>
   </center>
 
   {% endblock%}

@@ -6,16 +6,14 @@ from django.db.models.manager import ManagerDescriptor
 
 class user(models.Model):
     name=models.CharField(max_length=30)
-    phno=models.IntegerField()
+    phno=models.CharField(max_length=15)
     email=models.EmailField()
-    username=models.CharField(primary_key=True,max_length=10)
+    username=models.CharField(primary_key=True,max_length=30)
     password=models.CharField(max_length=10)
 
 class travel(models.Model):
     username=models.ForeignKey(user, on_delete=models.CASCADE)
-    start=models.CharField(max_length=30)
-    end=models.CharField(max_length=30)
-    pin=models.IntegerField()
+    startp=models.IntegerField()
+    endp=models.IntegerField()
     seats=models.IntegerField()
-    date=models.DateField(auto_now=False)
 
